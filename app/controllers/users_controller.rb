@@ -1,36 +1,53 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!,expect:[:top,:about]
+
 
 def new
     end
 
 def create
   @user = User.new(params[:user])
-  user.save
-  redirect_to show_user_path
+  if @user.save
+  redirect_to user_path(@user.id)
+else
+  render 'show'
+end
 end
 
 def show
 	@user = User.find(params[:id])
-  @users = User.all
+  @post_image = PostImage.new
 end
 
   def edit
-  	@user = User.find(params[:id])#userIDの受け渡し
+  @user = User.find(params[:id])#userIDの受け渡し
   end
 
   def update
   	@user = User.find(params[:id])
-  	@user.update(user_params)
-  	redirect_to user_path(@user)
+        if @user.update(user_params)
+            redirect_to user_path(current_user.id)
+        else
+        flash[:notice] = "エラーが発生しました。"
+            @post_images = PostImage.all
+            redirect_to user_path(current_user.id)
+        end
   end
 
   def index
-    @users = User.all
+  @post_image = PostImage.new
+  @users = User.all
   end
+
+  def destroy
+    @user = User.find(params[:id])
+    user.destroy
+    redirect_to post_images_path
+  end
+
 
   private
   def user_params
-  	params.require(:user).permit(:title,:body)
+  	params.require(:user).permit(:title,:body,:profile_image,:name)
   end
 end

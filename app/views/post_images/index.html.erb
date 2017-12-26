@@ -1,4 +1,8 @@
-        <% @post_images.each do |post| %>
-        <th><%= post.title %></th>
-        <th><%= post.body %></th>
-        <% end %>
+<% @post_images.each do |post| %>
+	<th><%= post.user.name %></th>
+	<th><%= post.id %></th>
+	<th><%= post.title %></th>
+	<th><%= post.body %></th>
+	<br>
+	<br>
+<% end %>

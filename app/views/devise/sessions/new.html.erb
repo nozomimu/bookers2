@@ -1,22 +1,9 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
- <div class="container">
-<a class="navbar-brand text-muted" href="#"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Bookers</a>
-   <ul class="nav navbar-nav navbar-right">
-    <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>　Home</a></li>
-    <li><a href="/about"><span class="glyphicon glyphicon-link" aria-hidden="true"></span>　About</a></li>
-    <li><a href="/users/sign_up"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>　sign up</a></li>
-    <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>　login</a></li>
-   </ul>
- </div>
-</div>
-
 <div class="yohaku">
-<br><br><br>
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :name %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
 

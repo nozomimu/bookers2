@@ -1,0 +1,64 @@
+  <div class="body">
+      <div class="container">
+        <p id="notice"></p>
+        
+        <div class="row">
+  <div class="col-xs-3">
+    <h2>User info</h2>
+     <%= attachment_image_tag @post_imagef.user, :profile_image, :fill, 100, 100, class: "img-square pull-left profile-thumb", fallback: "no_image.jpg"%><table class="table">
+      <tbody><tr></tr> 
+      <tr>
+        <th>name</th>
+        <th><%= @post_imagef.user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= @post_imagef.user.body %></th>
+      </tr>
+    </tbody></table>
+    <div class="row">
+   <% if @post_imagef.user.id == current_user.id %>
+  <%= link_to '　', edit_user_path(current_user.id), class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
+  <% end %><br><br>
+
+    <h2>New book</h2>
+  <%= form_for(@post_image) do |f| %>
+
+  <div class="field row">
+ <h5>Title</h5>
+<%= f.text_field :title,class:"col-xs-12" %>
+  </div>
+
+  <div class="field row">
+  <h5>Opinion</h5>
+  <%= f.text_area :body,class:"col-xs-12" %>
+  </div>
+
+    <input type="submit" class="btn btn-primary col-xs-12" data-disable-with="Create Book">
+  </div>
+  <% end %>
+
+  </div>
+
+  <div class="col-xs-9">
+    <h2>Book detail</h2>
+   <table class="table table-hover table-inverse">
+		  <tr>
+		<td><%= attachment_image_tag @post_imagef.user, :profile_image, :fill, 40, 40, class: "img-square pull-left profile-thumb", fallback: "no_image.jpg"%><br>
+      <br>
+      <%= link_to @post_imagef.user.name, user_path(@post_imagef.user.id) %>
+    </td>
+		<td><%= @post_imagef.title %></td>
+		<td><%= @post_imagef.body %></td>
+   
+</div>
+   <% if @post_imagef.user.id == current_user.id %>
+<td><%= link_to "Edit", edit_post_path(@post_imagef.id) %></td>
+
+<td><%= link_to "destroy", destroy_post_path(@post_imagef.id), method: :delete, "data-confirm"  => "本当に消しますか?" %></td> 
+<% end %>
+
+               </tr>
+    </table>
+      </div>
+    </div>

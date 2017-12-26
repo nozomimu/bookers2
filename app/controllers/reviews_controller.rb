@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!,except: [:top]
+  before_action :authenticate_user!,except: [:top,:about]
 
   def new
     @reviews = Review.all
